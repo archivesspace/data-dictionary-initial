@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 20171231011912) do
 
   create_table "fields", force: :cascade do |t|
+    t.string "field_id"
     t.string "field_name"
     t.string "field_type"
     t.string "field_table"

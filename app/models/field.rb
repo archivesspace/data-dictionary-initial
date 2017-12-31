@@ -7,14 +7,17 @@ class Field < ApplicationRecord
       header = spreadsheet.row(1)
 
       header.map! do |item|
-         item.downcase.parameterize(separator: '_')
+        break if item.nil? || item.empty?
+        item.downcase.parameterize(separator: '_')
       end
-
       header.push("field_table")
+      header.push("field_id")
 
       (2..spreadsheet.last_row).each do |i|
         next_row = spreadsheet.row(i)
+        break if next_row[0].nil? || next_row[0].empty?
         next_row.push(s)
+        next_row.push("#{next_row[0]}-#{s}")
         row = Hash[[header, next_row].transpose]
         if row["system_required"] != nil && row["system_required"] =~ /^Required$/i
           row["system_required"] = true
@@ -26,7 +29,8 @@ class Field < ApplicationRecord
         else
           row["system_generated"] = false
         end
-        field = find_by_id(row["id"]) || new
+        row["field_type"].gsub!(/,/,'') if row["field_type"] != nil
+        field = find_by(field_id: row["field_id"]) || new
         field.attributes = row.to_hash
         field.save!
       end

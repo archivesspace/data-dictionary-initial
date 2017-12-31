@@ -22,10 +22,8 @@ Feature: Manage Fields
   Scenario: Create Valid Field
     Given I have no fields
     And I am on the list of fields
-#    When I press "Choose File"
-#    And I fill in "File" with "test_data.xlsx"
     And I press "Import"
     Then I should see "Fields imported."
     And I should see "agent_family_id"
     And I should see "System generated"
-    And I should have 66 fields
+    And I should have 64 fields
