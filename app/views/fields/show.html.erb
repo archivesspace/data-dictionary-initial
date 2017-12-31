@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @field.field_name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @field.field_type %>
+</p>
+
+<p>
+  <strong>Table:</strong>
+  <%= @field.field_table %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @field.description %>
+</p>
+
+<p>
+  <strong>Staff interface label:</strong>
+  <%= @field.staff_interface_label %>
+</p>
+
+<p>
+  <strong>Public interface label:</strong>
+  <%= @field.public_interface_label %>
+</p>
+
+<p>
+  <strong>System required:</strong>
+  <%= @field.system_required %>
+</p>
+
+<p>
+  <strong>System generated:</strong>
+  <%= @field.system_generated %>
+</p>
+
+<p>
+  <strong>Example data:</strong>
+  <%= @field.example_data %>
+</p>
+
+<%= link_to 'Edit', edit_field_path(@field) %> |
+<%= link_to 'Back', fields_path %>

@@ -1,0 +1,62 @@
+<%= form_with(model: field, local: true) do |form| %>
+  <% if field.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(field.errors.count, "error") %> prohibited this field from being saved:</h2>
+
+      <ul>
+      <% field.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :field_name %>
+    <%= form.text_field :field_name, id: :field_name, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :field_type %>
+    <%= form.text_field :field_type, id: :field_type, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :field_table %>
+    <%= form.text_field :field_table, id: :field_table, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :field_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :staff_interface_label %>
+    <%= form.text_field :staff_interface_label, id: :field_staff_interface_label %>
+  </div>
+
+  <div class="field">
+    <%= form.label :public_interface_label %>
+    <%= form.text_field :public_interface_label, id: :field_public_interface_label %>
+  </div>
+
+  <div class="field">
+    <%= form.label :system_required %>
+    <%= form.check_box :system_required, id: :field_system_required %>
+  </div>
+
+  <div class="field">
+    <%= form.label :system_generated %>
+    <%= form.check_box :system_generated, id: :field_system_generated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :example_data %>
+    <%= form.text_area :example_data, id: :field_example_data %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
