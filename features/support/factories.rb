@@ -1,7 +1,7 @@
 require 'factory_bot'
 
 FactoryBot.define do
-  factory :creator_field, class: Field do
+  factory :creator, class: Field do
     field_name 'Creator'
   end
   factory :field1, class: Field do

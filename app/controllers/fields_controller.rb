@@ -54,7 +54,7 @@ class FieldsController < ApplicationController
 
   def import
     Field.import(params[:file])
-    redirect_to root_url, notice: "Fields imported."
+    redirect_to fields_url, notice: "Fields imported."
   end
 
   private

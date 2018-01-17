@@ -32,3 +32,42 @@ td, th {
   border: 1px solid #ccc;
   text-align: left;
 }
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  margin: 0px 50px 0 50px;
+  padding-top: -60px;
+}
+form {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  background-color: #EEE;
+  color: white;
+  box-sizing: border-box;
+}
+input[type=text] {
+  width: 50%;
+  font-size: 20px;
+  margin: 0px 20px 0 20px;
+}
+input[type=submit] {
+  width: 10%;
+  font-size: 20px;
+}
+input[type=file] {
+  width: 50%;
+  font-size: 20px;
+  background-color: #EEE;
+  color: black;
+}
+input[type=hidden] {
+  width: 50%;
+  font-size: 20px;
+  background-color: #EEE;
+  color: black;
+  box-sizing: border-box;
+  font-weight: bold;
+}

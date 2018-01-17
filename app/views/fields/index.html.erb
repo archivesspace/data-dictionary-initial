@@ -2,50 +2,9 @@
 
 <h1>Fields</h1>
 
-<h2>Import Fields</h2>
-
-<%= form_tag import_fields_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
-
 <br>
 <br>
-
-<div style="overflow-x:auto;">
-  <table>
-    <thead>
-      <tr>
-        <th>Table</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Staff interface label</th>
-        <th>Public interface label</th>
-        <th>System required</th>
-        <th>System generated</th>
-        <th>Example data</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @fields.each do |field| %>
-        <tr>
-          <td><%= field.field_table %></td>
-          <td><%= field.field_name %></td>
-          <td><%= field.field_type %></td>
-          <td><%= field.description %></td>
-          <td><%= field.staff_interface_label %></td>
-          <td><%= field.public_interface_label %></td>
-          <td><%= field.system_required %></td>
-          <td><%= field.system_generated %></td>
-          <td><%= field.example_data %></td>
-          <td><%= link_to 'Show', field %></td>
-          <td><%= link_to 'Update Field', edit_field_path(field) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<%= render :partial => 'import' %>
 <br>
+<br>
+<%= render :partial => "shared/results" %>

@@ -1,0 +1,10 @@
+<form id='search' method='get' action='/search' >
+    <input type='text' id='query' name='query' />
+    <input type='submit' value='Search' />
+</form>
+<br>
+<br>
+
+<div class='results'>
+  <%= render :partial => "shared/results" %>
+</div>
