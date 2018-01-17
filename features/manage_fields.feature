@@ -8,17 +8,6 @@ Feature: Manage Fields
     When I go to the list of fields
     Then I should see "Creator"
 
-# Field name:string type:string table:string description:text staff_interface_label:string
-# public_interface_label:string system_required:boolean system_generated:boolean example_data:text
-  Scenario: Modify Field Data
-    Given I have fields
-    And I am on the list of fields
-    When I follow "Update Field"
-    And I fill in "Description" with "Edited Description"
-    And I press "Update Field"
-    Then I should see "Field was successfully updated"
-    And I should see "Edited Description"
-
   Scenario: Create Valid Field
     Given I have no fields
     And I am on the list of fields

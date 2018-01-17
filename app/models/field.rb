@@ -45,4 +45,8 @@ class Field < ApplicationRecord
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
+  def self.like(field_name)
+    field_name.nil? ? [] : where(['field_name LIKE ?', "%#{field_name}%"])
+  end
 end

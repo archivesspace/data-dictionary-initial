@@ -1,0 +1,26 @@
+<div style="overflow-x:auto;">
+
+  <ol class='results'>
+    <table>
+      <thead>
+        <tr>
+          <th>Table</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Example data</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @fields.each do |field| %>
+          <tr>
+            <td><%= field.field_table %></td>
+            <td><%= link_to(field.field_name, [field]) %></td>
+            <td><%= field.description %></td>
+            <td><%= field.example_data %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </ol>
+</div>

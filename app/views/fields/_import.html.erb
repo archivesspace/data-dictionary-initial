@@ -1,0 +1,8 @@
+<h2>Import Fields</h2>
+
+<span class="btn-file">
+  <%= form_tag import_fields_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</span>

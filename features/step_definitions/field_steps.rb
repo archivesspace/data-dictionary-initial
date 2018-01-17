@@ -1,5 +1,5 @@
 Given /^I have a field named (.+)$/ do |name|
-  FactoryBot.create(:creator_field)
+  FactoryBot.create(:creator)
 end
 
 When /^I go to (.+)$/ do |page_name|
@@ -11,7 +11,7 @@ Then /^I should see "([^\"]*)"$/ do |string|
 end
 
 Given /^I have fields$/ do
-  FactoryBot.create(:creator_field)
+  FactoryBot.create(:creator)
   FactoryBot.create(:field1)
   FactoryBot.create(:field2)
 end
