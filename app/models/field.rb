@@ -1,4 +1,10 @@
 class Field < ApplicationRecord
+  include PgSearch
+  pg_search_scope :search_by_keyword, :against => [:field_id, :field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label]
+  pg_search_scope :search_by_field_name, :against => :field_name
+  pg_search_scope :search_by_table, :against => :field_table
+
+
   def self.import(file)
     spreadsheet = open_spreadsheet(file)
     spreadsheet.sheets.each do |s|
@@ -49,4 +55,10 @@ class Field < ApplicationRecord
   def self.like(field_name)
     field_name.nil? ? [] : where(['field_name LIKE ?', "%#{field_name}%"])
   end
+
+  def self.rebuild_pg_search_documents
+    find_each { |record| record.update_pg_search_document }
+  end
+
+
 end
