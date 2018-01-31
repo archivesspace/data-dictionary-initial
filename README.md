@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The ArchivesSpace Data Dictionary provides a simple mechanism to identify information about the data elements in the ArchivesSpace database schema. It can be accessed at https://desolate-tundra-60608.herokuapp.com/.
 
-Things you may want to cover:
+NOTE: As of January 31, 2018, this is a BETA version that has not been officially released. Please send feedback by emailing laney.mcglohon@lyrasis.org or submitting an issue to this GitHub repository.
 
-* Ruby version
+## Intended Use
 
-* System dependencies
+The information in this application is expected to be used by the ArchivesSpace community to determine where data is stored in the ArchivesSpace database along with how the data is displayed in the staff and public user interfaces. We expect it will be helpful for a variety of purposes, including writing reports, working with the ArchivesSpace API, and writing code for functions in the application.
 
-* Configuration
+## Future Enhancements
 
-* Database creation
+We anticipate adding additional data points and functionality over time to enhance the usefulness of this application.
 
-* Database initialization
+Planned enhancements include:
+  * Adding crosswalk information for the following metadata standards:
+     * EAD
+     * MARC
+     * MODS
+     * DC
+  * Highlighting results in context
+  * Sort capability from column headings
+  * Ability to search specific fields
+  * Exporting of search results
 
-* How to run the test suite
+## Special Thanks
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This application would not be possible without the work of the ArchivesSpace User Advisory Council Reports Sub-team, particularly the extraordinary efforts by Nancy Enneking.
