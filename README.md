@@ -1,6 +1,6 @@
 # README
 
-The ArchivesSpace Data Dictionary provides a simple mechanism to identify information about the data elements in the ArchivesSpace database schema. It can be accessed at https://desolate-tundra-60608.herokuapp.com/.
+The ArchivesSpace Data Dictionary provides a simple mechanism to identify information about the data elements in the ArchivesSpace database schema.
 
 NOTE: As of January 31, 2018, this is a BETA version that has not been officially released. Please send feedback by emailing ArchivesSpaceHome@lyrasis.org or submitting an issue to this GitHub repository.
 

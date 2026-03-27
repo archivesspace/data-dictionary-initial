@@ -1,5 +1,5 @@
 class Field < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_by_keyword, :against => [:field_id, :field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label]
   pg_search_scope :search_by_field_name, :against => :field_name
   pg_search_scope :search_by_table, :against => :field_table
