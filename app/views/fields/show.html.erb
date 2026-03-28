@@ -1,49 +1,272 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @field.field_name %></h2>
+
+<h3>Basic Information</h3>
+
+<% if @field.field_id.present? %>
+<p>
+  <strong>Field ID:</strong>
+  <%= @field.field_id %>
+</p>
+<% end %>
+
+<% if @field.field_name.present? %>
 <p>
   <strong>Field Name:</strong>
   <%= @field.field_name %>
 </p>
+<% end %>
 
+<% if @field.field_type.present? %>
 <p>
   <strong>Type:</strong>
   <%= @field.field_type %>
 </p>
+<% end %>
 
+<% if @field.field_table.present? %>
 <p>
   <strong>Table:</strong>
   <%= @field.field_table %>
 </p>
+<% end %>
 
+<% if @field.record_type_description.present? %>
 <p>
-  <strong>Description:</strong>
+  <strong>Record Type Description:</strong>
+  <%= @field.record_type_description %>
+</p>
+<% end %>
+
+<% if @field.description.present? %>
+<p>
+  <strong>Field Description:</strong>
   <%= @field.description %>
 </p>
+<% end %>
 
+<% if @field.parent_schema.present? %>
 <p>
-  <strong>Staff interface label:</strong>
-  <%= @field.staff_interface_label %>
+  <strong>Parent Schema:</strong>
+  <%= @field.parent_schema %>
 </p>
+<% end %>
 
+<% if @field.inherited_fields.present? %>
 <p>
-  <strong>Public interface label:</strong>
-  <%= @field.public_interface_label %>
+  <strong>Inherited Fields:</strong>
+  <%= @field.inherited_fields %>
 </p>
+<% end %>
 
+<% if @field.example_data.present? %>
 <p>
-  <strong>System required:</strong>
-  <%= @field.system_required %>
-</p>
-
-<p>
-  <strong>System generated:</strong>
-  <%= @field.system_generated %>
-</p>
-
-<p>
-  <strong>Example data:</strong>
+  <strong>Example Data:</strong>
   <%= @field.example_data %>
 </p>
+<% end %>
+
+<h3>Interface &amp; Display</h3>
+
+<% if @field.staff_interface_label.present? %>
+<p>
+  <strong>Staff Interface Label:</strong>
+  <%= @field.staff_interface_label %>
+</p>
+<% end %>
+
+<% if @field.public_interface_label.present? %>
+<p>
+  <strong>Public Interface Label:</strong>
+  <%= @field.public_interface_label %>
+</p>
+<% end %>
+
+<% if @field.scope.present? %>
+<p>
+  <strong>Scope:</strong>
+  <%= @field.scope %>
+</p>
+<% end %>
+
+<% if @field.ui_display.present? %>
+<p>
+  <strong>UI Display:</strong>
+  <%= @field.ui_display %>
+</p>
+<% end %>
+
+<% if @field.ui_visibility.present? %>
+<p>
+  <strong>UI Visibility:</strong>
+  <%= @field.ui_visibility %>
+</p>
+<% end %>
+
+<h3>Validation</h3>
+
+<% unless @field.system_required.nil? %>
+<p>
+  <strong>Required:</strong>
+  <%= @field.system_required %>
+</p>
+<% end %>
+
+<% unless @field.system_generated.nil? %>
+<p>
+  <strong>System Generated:</strong>
+  <%= @field.system_generated %>
+</p>
+<% end %>
+
+<% if @field.required_permission.present? %>
+<p>
+  <strong>Required Permission:</strong>
+  <%= @field.required_permission %>
+</p>
+<% end %>
+
+<% unless @field.max_length.nil? %>
+<p>
+  <strong>Max Length:</strong>
+  <%= @field.max_length %>
+</p>
+<% end %>
+
+<% unless @field.min_items.nil? %>
+<p>
+  <strong>Min Items:</strong>
+  <%= @field.min_items %>
+</p>
+<% end %>
+
+<% if @field.pattern.present? %>
+<p>
+  <strong>Pattern:</strong>
+  <%= @field.pattern %>
+</p>
+<% end %>
+
+<% if @field.default_value.present? %>
+<p>
+  <strong>Default Value:</strong>
+  <%= @field.default_value %>
+</p>
+<% end %>
+
+<% if @field.conditions.present? %>
+<p>
+  <strong>Conditions:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.conditions)) %></pre>
+</p>
+<% end %>
+
+<% if @field.items.present? %>
+<p>
+  <strong>Items:</strong>
+  <%= @field.items %>
+</p>
+<% end %>
+
+<h3>Enumeration</h3>
+
+<% if @field.dynamic_enum.present? %>
+<p>
+  <strong>Dynamic Enum:</strong>
+  <%= @field.dynamic_enum %>
+</p>
+<% end %>
+
+<% if @field.enum_values.present? %>
+<p>
+  <strong>Enum Values:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.enum_values)) %></pre>
+</p>
+<% end %>
+
+<% if @field.refs.present? %>
+<p>
+  <strong>Refs:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.refs)) %></pre>
+</p>
+<% end %>
+
+<h3>Search &amp; Indexing</h3>
+
+<% if @field.solr_index.present? %>
+<p>
+  <strong>Solr Index:</strong>
+  <%= @field.solr_index %>
+</p>
+<% end %>
+
+<% if @field.solr_field.present? %>
+<p>
+  <strong>Solr Field:</strong>
+  <%= @field.solr_field %>
+</p>
+<% end %>
+
+<% if @field.solr_note.present? %>
+<p>
+  <strong>Solr Note:</strong>
+  <%= @field.solr_note %>
+</p>
+<% end %>
+
+<% if @field.export_mappings.present? %>
+<h3>Export Mappings</h3>
+<p>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.export_mappings)) %></pre>
+</p>
+<% end %>
+
+<h3>Record Type Context</h3>
+
+<% if @field.used_on.present? %>
+<p>
+  <strong>Used On:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.used_on)) %></pre>
+</p>
+<% end %>
+
+<% if @field.subrecords.present? && !JSON.parse(@field.subrecords).empty? %>
+<p>
+  <strong>Subrecords:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.subrecords)) %></pre>
+</p>
+<% end %>
+
+<% if @field.relationships.present? && !JSON.parse(@field.relationships).empty? %>
+<p>
+  <strong>Relationships:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.relationships)) %></pre>
+</p>
+<% end %>
+
+<% if @field.allowed_type_values.present? %>
+<p>
+  <strong>Allowed Type Values:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.allowed_type_values)) %></pre>
+</p>
+<% end %>
+
+<h3>API &amp; System</h3>
+
+<% if @field.api_endpoint.present? %>
+<p>
+  <strong>API Endpoint:</strong>
+  <%= @field.api_endpoint %>
+</p>
+<% end %>
+
+<% if @field.version_note.present? %>
+<p>
+  <strong>Version Note:</strong>
+  <pre><%= JSON.pretty_generate(JSON.parse(@field.version_note)) %></pre>
+</p>
+<% end %>
 
 <!-- <%= link_to 'Edit', edit_field_path(@field) %> |  -->
 <%= link_to 'Back', :back %>
