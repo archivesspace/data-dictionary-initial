@@ -1,27 +1,85 @@
-# README
+# ArchivesSpace Data Dictionary
 
-The ArchivesSpace Data Dictionary provides a simple mechanism to identify information about the data elements in the ArchivesSpace database schema.
-
-NOTE: As of January 31, 2018, this is a BETA version that has not been officially released. Please send feedback by emailing ArchivesSpaceHome@lyrasis.org or submitting an issue to this GitHub repository.
+A Rails 8 web application providing a searchable data dictionary for [ArchivesSpace](https://archivesspace.org/). It documents database fields, their types, descriptions, validation rules, and how they appear in the staff and public interfaces.
 
 ## Intended Use
 
-The information in this application is expected to be used by the ArchivesSpace community to determine where data is stored in the ArchivesSpace database along with how the data is displayed in the staff and public user interfaces. We expect it will be helpful for a variety of purposes, including writing reports, working with the ArchivesSpace API, and writing code for functions in the application.
+This application is intended to help the ArchivesSpace community understand where data is stored in the ArchivesSpace database and how it is displayed in the staff and public interfaces. It is useful for writing reports, working with the ArchivesSpace API, and developing application code.
+
+## Requirements
+
+- Ruby (see `.ruby-version`)
+- Rails 8
+- PostgreSQL
+
+## Setup
+
+```bash
+# Install dependencies
+bundle install
+
+# Create and load the database
+bin/rails db:create db:schema:load
+
+# Start the development server
+bin/rails s
+```
+
+## Importing Data
+
+### From a JSON file
+
+Place a `data_dictionary.json` file in the Rails root directory and run:
+
+```bash
+bin/rails import:json
+```
+
+To import from a different path:
+
+```bash
+bin/rails "import:json[/path/to/data_dictionary.json]"
+```
+
+The task upserts records by `field_id` (derived from field name + table name), so it is safe to re-run — existing fields will be updated and new ones added.
+
+To wipe all existing field data and reload from a fresh JSON file:
+
+```bash
+bin/rails import:reset
+```
+
+To reset using a file at a different path:
+
+```bash
+bin/rails "import:reset[/path/to/data_dictionary.json]"
+```
+
+### From a spreadsheet
+
+Navigate to the Fields list and use the import form to upload an `.xlsx`, `.xls`, or `.csv` file. Each sheet in the workbook becomes a table name; rows become fields. Records are upserted by `field_id`, so re-uploading is safe.
+
+## Running Tests
+
+```bash
+# Cucumber acceptance tests
+bundle exec cucumber
+
+# Run a single feature
+bundle exec cucumber features/search.feature
+
+# RSpec unit tests
+bundle exec rspec
+```
 
 ## Future Enhancements
 
-We anticipate adding additional data points and functionality over time to enhance the usefulness of this application.
-
 Planned enhancements include:
-  * Adding crosswalk information for the following metadata standards:
-     * EAD
-     * MARC
-     * MODS
-     * DC
-  * Highlighting results in context
-  * Sort capability from column headings
-  * Ability to search specific fields
-  * Exporting of search results
+
+- Crosswalk information for metadata standards (EAD, MARC, MODS, DC)
+- Highlighting search results in context
+- Sort capability from column headings
+- Exporting search results
 
 ## Special Thanks
 

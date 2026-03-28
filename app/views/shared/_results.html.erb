@@ -6,8 +6,13 @@
         <tr>
           <th>Table</th>
           <th>Field Name</th>
+          <th>Type</th>
           <th>Description</th>
-          <th>Example data</th>
+          <th>Staff Label</th>
+          <th>Public Label</th>
+          <th>Required</th>
+          <th>System Generated</th>
+          <th>Example Data</th>
         </tr>
       </thead>
 
@@ -16,7 +21,12 @@
           <tr>
             <td><%= field.field_table %></td>
             <td><%= link_to(field.field_name, [field]) %></td>
+            <td><%= field.field_type %></td>
             <td><%= field.description %></td>
+            <td><%= field.staff_interface_label %></td>
+            <td><%= field.public_interface_label %></td>
+            <td><%= field.system_required %></td>
+            <td><%= field.system_generated %></td>
             <td><%= field.example_data %></td>
           </tr>
         <% end %>

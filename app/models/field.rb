@@ -1,6 +1,7 @@
 class Field < ApplicationRecord
   include PgSearch::Model
-  pg_search_scope :search_by_keyword, :against => [:field_id, :field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label]
+  multisearchable against: [:field_id, :field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label, :record_type_description, :scope, :solr_note, :api_endpoint]
+  pg_search_scope :search_by_keyword, against: [:field_id, :field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label, :record_type_description, :scope, :solr_note, :api_endpoint]
   pg_search_scope :search_by_field_name, :against => :field_name
   pg_search_scope :search_by_table, :against => :field_table
 
@@ -49,6 +50,68 @@ class Field < ApplicationRecord
     when ".xls" then Roo::Excel.new(file.path)
     when ".xlsx" then Roo::Excelx.new(file.path)
     else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+  def self.import_json(file_path)
+    data = JSON.parse(File.read(file_path))
+
+    [
+      ["record_types", data["record_types"] || {}],
+      ["subrecord_types", data["subrecord_types"] || {}],
+      ["note_types", data["note_types"] || {}]
+    ].each do |section, types|
+      types.each do |table_name, record_type|
+        next unless record_type.is_a?(Hash)
+
+        ui_visibility_map = {}
+        (record_type.dig("field_ui_visibility", "staff_only") || []).each { |n| ui_visibility_map[n] = "staff_only" }
+        (record_type.dig("field_ui_visibility", "api_only") || []).each { |n| ui_visibility_map[n] = "api_only" }
+
+        (record_type["fields"] || []).each do |f|
+          field_id = "#{f['name']}-#{table_name}"
+          field = find_by(field_id: field_id) || new
+          field.attributes = {
+            field_id:              field_id,
+            field_name:            f["name"],
+            field_table:           table_name,
+            field_type:            f["type"],
+            description:           f["description"],
+            staff_interface_label: f["staff_label"],
+            public_interface_label: f["public_label"],
+            system_required:       f["required"] == true,
+            system_generated:      f["readonly"] == true,
+            example_data:          f["example"].is_a?(String) ? f["example"] : f["example"]&.to_json,
+            api_endpoint:          record_type["api_endpoint"],
+            scope:                 record_type["scope"],
+            ui_display:            record_type["ui_display"]&.to_json,
+            ui_visibility:         ui_visibility_map[f["name"]],
+            conditions:            f["conditions"]&.to_json,
+            default_value:         f["default"].nil? ? nil : f["default"].to_s,
+            dynamic_enum:          f["dynamic_enum"],
+            enum_values:           f["enum"]&.to_json,
+            export_mappings:       f["export_mappings"]&.to_json,
+            items:                 f["items"],
+            max_length:            f["max_length"],
+            min_items:             f["min_items"],
+            pattern:               f["pattern"],
+            refs:                  f["refs"]&.to_json,
+            required_permission:   f["required_permission"],
+            solr_field:            f["solr_field"],
+            solr_index:            f["solr_index"],
+            solr_note:             f["solr_note"],
+            version_note:          f["version_note"]&.to_json,
+            record_type_description: record_type["description"],
+            parent_schema:           record_type["parent_schema"],
+            relationships:           record_type["relationships"]&.to_json,
+            subrecords:              record_type["subrecords"]&.to_json,
+            allowed_type_values:     record_type["allowed_type_values"]&.to_json,
+            used_on:                 record_type["used_on"]&.to_json,
+            inherited_fields:        record_type["inherited_fields"]
+          }
+          field.save!
+        end
+      end
     end
   end
 

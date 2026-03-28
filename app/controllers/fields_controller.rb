@@ -65,6 +65,16 @@ class FieldsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
-      params.require(:field).permit(:field_name, :field_type, :field_table, :description, :staff_interface_label, :public_interface_label, :system_required, :system_generated, :example_data)
+      params.require(:field).permit(
+        :field_name, :field_type, :field_table, :description,
+        :staff_interface_label, :public_interface_label,
+        :system_required, :system_generated, :example_data,
+        :api_endpoint, :conditions, :default_value, :dynamic_enum,
+        :enum_values, :export_mappings, :items, :max_length, :min_items,
+        :pattern, :refs, :required_permission, :scope, :solr_field,
+        :solr_index, :solr_note, :ui_display, :ui_visibility, :version_note,
+        :record_type_description, :parent_schema, :relationships,
+        :subrecords, :allowed_type_values, :used_on, :inherited_fields
+      )
     end
 end
