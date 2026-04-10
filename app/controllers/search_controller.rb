@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     if params[:query].present?
       @fields = Field.search_by_keyword(params[:query])
     else
-     @fields = Field.all
+     @fields = Field.order(:field_table, :field_name)
     end
   end
 end
