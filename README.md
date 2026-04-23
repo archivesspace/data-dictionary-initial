@@ -25,6 +25,31 @@ bin/rails db:create db:schema:load
 bin/rails s
 ```
 
+## Running with Docker
+
+A `Dockerfile` and `compose.yaml` are provided to run the app (and a PostgreSQL 16 database) in containers.
+
+### Prerequisites
+
+- Docker Dekstop or Docker Engine 24+.
+
+### Quick start
+
+```bash
+# Build the image and start the app + database
+docker compose up
+```
+
+Then browse to <http://localhost:3000>.
+
+On first startup the web container will:
+
+1. Create the database schema (`rails db:prepare`).
+2. Seed the database from `data_dictionary.json` at the repo root.
+
+Subsequent starts skip seeding.
+
+
 ## Importing Data
 
 ### From a JSON file

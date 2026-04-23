@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+file_path = Rails.root.join("data_dictionary.json").to_s
+if File.exist?(file_path)
+  puts "Importing from #{file_path}..."
+  Field.import_json(file_path)
+  puts "Done. #{Field.count} fields now in the database."
+else
+  warn "Skipping import: #{file_path} not found."
+end
